@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bdi.sb.service.UserInfoService;
@@ -49,5 +51,15 @@ public class UserController {
 	@GetMapping("/users")
 	public List<UserInfoVO> getUserInfoList(){
 		return uiService.selectUserInfoList(null);
+	}
+	@PostMapping("/user/login")
+	public UserInfoVO doLogin(@ModelAttribute UserInfoVO ui) {
+		log.debug("user=>{}",ui);
+		return uiService.doLogin(ui);
+	}
+	@PostMapping("/user/join")
+	public int doSignup(@ModelAttribute UserInfoVO ui) {
+		log.debug("user=>{}",ui);
+		return uiService.doSignup(ui);
 	}
 }

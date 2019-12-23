@@ -8,6 +8,7 @@ public interface UserInfoMapper {
 
 	public List<UserInfoVO> selectUserInfoList(UserInfoVO ui);
 	public UserInfoVO doLogin(UserInfoVO ui);
+	
 	public int doSignup(UserInfoVO ui);
 	public int deleteUserInfos(UserInfoVO ui);
 	public int updateUserInfo(UserInfoVO ui);
