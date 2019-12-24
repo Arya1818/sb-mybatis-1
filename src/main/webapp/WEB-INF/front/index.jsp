@@ -14,6 +14,25 @@
 <link rel="stylesheet" href="/css/bootstrap-grid.min.css"/>
 <link rel="stylesheet" href="/css/bootstrap-reboot.min.css"/>
 <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+<style>
+a {
+	cursor:pointer;
+}
+a[data-page]{
+	color:grey !important;
+	
+}
+a[data-page]:hover{
+	font-weight:bold;
+	color:orange !important;
+	cursor:pointer;
+}
+#pagination{
+	text-align:center;
+}
+</style>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -36,6 +55,8 @@
         <li class="nav-item" id="join" data-page="join"><a class="nav-link" href="/?page=join">회원가입</a>
         </li>
         <li class="nav-item" id="contact" data-page="contact"><a class="nav-link" href="#">Contact</a>
+        </li>
+        <li class="nav-item" id="list" data-page="list"><a class="nav-link" href="?page=list">list</a>
         </li>
       </ul>
     </div>
