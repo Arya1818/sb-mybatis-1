@@ -11,8 +11,51 @@
 		limit #{page.startNum},10
 	</select>
 	
+	<select id="selectOneTest" resultType="test"> 
+		select * from test_info
+		where ti_num=#{tiNum}
+	</select>
+	
 	<select id="totalTestInfoCount" resultType="int">
 		 SELECT COUNT(1) FROM test_info
 	</select>
+	
+	<insert id="insertTest" parameterType="test">
+		insert into test_info(ti_name, ti_addr, ti_etc)
+		values(#{tiName}, #{tiAddr}, #{tiEtc}) 
+	</insert>
+	
+	<update id="updateTiUpdcnt">
+		update test_info
+		set ti_updcnt = ti_uptdnt + 1
+		where ti_num=#{tiNum}
+	</update>
+	
+	<update id="updateTest" parameterType="test">
+		update test_info
+		<set>
+			<if test='tiName!="" or tiName!=null'>
+				, ti_name = #{tiName}
+			</if>
+			<if test='tiAddr"" or tiAddr!=null'>
+				, ti_addr = #{tiAddr}
+			</if>
+			<if test='tiEtc!="" or tiEtc!=null'>
+				, ti_etc = #{tiEtc}
+			</if>
+		</set>
+		where ti_num = #{tiNum}
+	</update>
+	
+	<delete id="deleteTest" parameterType="java.util.List">
+		delete from test_info
+		<where>
+			<if test="list !=null">
+	 	  	<foreach collection="list" item="nums" separator="or">
+	 	  			ti_num = #{nums}
+	 	  	</foreach>
+	 	 	</if>	
+		</where>
+	</delete>
 	
 </mapper>

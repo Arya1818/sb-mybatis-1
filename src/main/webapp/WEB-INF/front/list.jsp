@@ -4,6 +4,7 @@
 <div class="container">
 	<table class="table table-hover">
 		<tr>
+			<th>선택</th>
 			<th>번호</th>
 			<th>이름</th>
 			<th>주소</th>
@@ -13,10 +14,32 @@
 		</tbody>
 	</table>
 	<div id="pagination"></div>
+	<button data-page="insert">게시물작성</button>
+	<button onclick="deleteTest()">게시물삭제</button>
 </div>
 
 <script>
 var rowCount = 10;
+function deleteTest(){
+	var checkedObjs = $('input[type=checkbox]:checked');
+	var tiNums = [];
+	for(var i=0; i<checkedObjs.length; i++){
+		tiNums.push(checkedObjs[i].parentNode.parentNode.childNodes[1].innerText);
+	}
+	$.ajax({
+		url:'/tests',
+		method:'DELETE',
+		contentType:'application/json;charset=utf-8',
+		data:JSON.stringify(tiNums),
+		success:function(res){
+			console.log(res);
+			alert(res.msg);
+		}
+	})
+}
+
+
+
 $(document).ready(function(){
 	goPage(1);
 })
@@ -29,10 +52,12 @@ function goPage(page){
 		success:function(res){
 			var list = res.list;
 			//var tBody = document.getElementById('tbody');
+			console.log(list);
 			var html = '';
 			for(var i=0; i<list.length; i++){
 				html += '<tr>';
-				html += '<td>' + list[i].tiNum + '</td>';
+				html += '<td><input type="checkbox"></td>';
+				html += '<td data-page="view">' + list[i].tiNum + '</td>';
 				html += '<td>' + list[i].tiName + '</td>';
 				html += '<td>' + list[i].tiAddr+ '</td>';
 				html += '<td>' + list[i].tiEtc+ '</td>';
@@ -71,6 +96,10 @@ function setEvent(){
 	$('a[data-page]').on('click',function(){
 		goPage(this.getAttribute('data-page'));
 	})
+	$('td[data-page]').on('click',function(){
+		location.href = '/?page='+ this.getAttribute('data-page') + '&tiNum=' + this.innerText;
+	})
+
 }
 
 </script>
