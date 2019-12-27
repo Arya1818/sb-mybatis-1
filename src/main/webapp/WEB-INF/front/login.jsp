@@ -44,6 +44,8 @@ $(document).ready(function(){
 		}
 		
 		var data = 'uiId=' + $('#uiId').val() + '&uiPwd=' + $('#uiPwd').val();
+		
+		
 		$.ajax({
 			url:'/user/login',
 			method:'POST',

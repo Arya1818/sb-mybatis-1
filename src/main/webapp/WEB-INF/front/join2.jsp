@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<table border="1">
+<form action="/front/join2" onsubmit="return joinCheck()">
+<table border="1" >
 	<tr>
 		<th>이름</th>
 		<td><input type="text" name="uiName" id="uiName"></td>
@@ -22,40 +22,30 @@
 		<td><input type="password" name="uiPwd" id="uiPwd"></td>
 	</tr>
 	<tr>
-		<th>비밀번호확인</th>
-		<td><input type="password" name="uiPwdCheck" id="uiPwdCheck"></td>
-	</tr>
-	<tr>
-		<th colspan="2"><button onclick="checkBtn()">회원가입</button></th>
+		<th colspan="2"><button>회원가입</button></th>
 	</tr>
 
 </table>
+</form>
 
 <script>
-function checkBtn(){
+function joinBtn(){
 	var uiNameObj = document.querySelector('uiName');
 	if(uiName.value.trim().length<2){
-		alert("이름은 2글자 이상입니다.");
+		alert("이름은 2글자 이상입니다");
 		uiNameObj.value='';
 		uiNameObj.focus();
 		return false;
 	}
 	var uiIdObj = document.querySelector('uiId');
 	if(uiId.value.trim().length<5){
-		alert("아이디는 5글자 이상입니다.");
+		alert('아이디는 5글자 이상입니다');
 		uiIdObj.value='';
 		uiIdObj.focus();
 		return false;
 	}
-	var uiPwdCheckObj = document.querSelector('uiPwdCheck');
-	if(uiPwd.value!=uiPwdCheck.value){
-		alert("비밀번호와 일치하지 않음")
-		return false;
-	}
-
-	
+	return true;
 }
-
 </script>
 </body>
 </html>
