@@ -1,7 +1,9 @@
 package com.bdi.sb.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,17 +65,19 @@ public class HorseController {
 	@PostMapping("/start/game/{cnt}")
 	public List<Horse> startGame(@PathVariable("cnt") int cnt) {
 		stopGame();
-
 		Random r = new Random();
-
 		for (int i = 1; i <= cnt; i++) {
 			int speed = r.nextInt(100) + 1;
 			Horse h = new Horse("말" + i, speed);
 			hList.add(h);
 		}
-		System.out.println("시작했다고 칩시다~");
+		List<Map<String,Object>> rList = new ArrayList<>();
 		for (int i = 0; i < hList.size(); i++) {
 			hList.get(i).start();
+			Map<String,Object> horse = new HashMap<>();
+			horse.put("name", hList.get(i).getHorseName());
+			horse.put("left", hList.get(i).getLeft());
+			rList.add(horse);
 		}
 
 		return hList;
